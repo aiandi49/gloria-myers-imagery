@@ -285,20 +285,99 @@
 
   .pair-images img {
     width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
+    height: auto;
     display: block;
-    filter: grayscale(0);
-    transition: transform 0.4s ease;
+    cursor: zoom-in;
+    transition: opacity 0.3s ease;
   }
 
   .pair-images img:first-child {
     filter: sepia(0.3) grayscale(0.4);
   }
 
-  .pair-images:hover img {
-    transform: scale(1.02);
+  .pair-images img:hover {
+    opacity: 0.88;
   }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20,14,10,0.96);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open {
+    display: flex;
+  }
+
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 92vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 0 80px rgba(0,0,0,0.8);
+    cursor: default;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background: var(--gold);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    z-index: 10000;
+  }
+
+  .lightbox-caption {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    z-index: 10000;
+  }
+
+  .lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(184,147,90,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 1.5rem;
+    width: 44px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: background 0.2s;
+  }
+
+  .lightbox-nav:hover { background: rgba(184,147,90,0.4); }
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
 
   .pair-tags {
     display: flex;
@@ -670,16 +749,70 @@
   <p>© 2026 <span>Gloria Myers' Imagery</span> · All rights reserved</p>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lb-prev">‹</button>
+  <img src="" alt="" id="lb-img">
+  <button class="lightbox-nav lightbox-next" id="lb-next">›</button>
+  <span class="lightbox-caption" id="lb-caption"></span>
+</div>
+
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
+      if (e.isIntersecting) e.target.classList.add('visible');
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // LIGHTBOX
+  const allImgs = [];
+  document.querySelectorAll('.pair-images img').forEach((img, i) => {
+    allImgs.push({ src: img.src, caption: img.closest('.photo-pair').querySelector('.pair-label').textContent + ' — ' + (img.classList.contains('after-img') ? 'After' : img === img.parentElement.firstElementChild ? 'Before' : 'After') });
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
+  // Tag before/after for caption
+  document.querySelectorAll('.pair-images').forEach(pair => {
+    const imgs = pair.querySelectorAll('img');
+    if (imgs[1]) imgs[1].classList.add('after-img');
+  });
+
+  let current = 0;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+
+  function openLightbox(i) {
+    current = i;
+    lbImg.src = allImgs[i].src;
+    lbCaption.textContent = allImgs[i].caption;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function navigate(dir) {
+    current = (current + dir + allImgs.length) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbCaption.textContent = allImgs[current].caption;
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); navigate(-1); });
+  document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); navigate(1); });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
 </script>
 </body>
 </html>
