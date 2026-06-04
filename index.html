@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gloria Myers' Imagery — Photo Restoration</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FDFAF4;
+    --gold: #B8935A;
+    --gold-light: #D4AA72;
+    --dark: #1A1410;
+    --brown: #3D2B1F;
+    --muted: #7A6A5A;
+    --border: rgba(184,147,90,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background: var(--dark);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(184,147,90,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(184,147,90,0.08) 0%, transparent 60%);
+  }
+
+  .hero-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 0.2em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: var(--gold);
+    color: var(--dark);
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.2s ease;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .hero-cta:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+  }
+
+  .hero-scroll span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* SERVICE STRIP */
+  .service-strip {
+    background: var(--gold);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .service-strip span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dark);
+  }
+
+  .strip-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--dark);
+    opacity: 0.4;
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 7rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .about h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--brown);
+    margin-bottom: 2rem;
+  }
+
+  .about h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .about p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .price-callout {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 1.5rem 3rem;
+    border: 1px solid var(--border);
+    background: var(--cream);
+  }
+
+  .price-callout .price-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .price-callout .price-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  /* GALLERY */
+  .gallery-section {
+    padding: 4rem 2rem 7rem;
+    background: var(--cream);
+  }
+
+  .gallery-section > .section-label,
+  .gallery-section > h2 {
+    text-align: center;
+    display: block;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gallery-section > h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--brown);
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .photo-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pair-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .pair-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--gold);
+    padding: 3px;
+  }
+
+  .pair-images img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0);
+    transition: transform 0.4s ease;
+  }
+
+  .pair-images img:first-child {
+    filter: sepia(0.3) grayscale(0.4);
+  }
+
+  .pair-images:hover img {
+    transform: scale(1.02);
+  }
+
+  .pair-tags {
+    display: flex;
+    gap: 3px;
+    margin-top: 3px;
+  }
+
+  .pair-tag {
+    flex: 1;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    background: var(--brown);
+    padding: 0.4rem;
+  }
+
+  .pair-tag.new-tag {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* HOW IT WORKS */
+  .how-section {
+    padding: 7rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .how-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--brown);
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .step {
+    padding: 2rem;
+    border-top: 2px solid var(--gold);
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step h3 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 0.75rem;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--dark);
+    padding: 7rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(184,147,90,0.15) 0%, transparent 60%);
+  }
+
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 1.2rem 4rem;
+    background: var(--gold);
+    color: var(--dark);
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.2s ease;
+    position: relative;
+  }
+
+  .cta-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-3px);
+  }
+
+  .cta-note {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.3);
+    position: relative;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(184,147,90,0.15);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.3);
+  }
+
+  footer span {
+    color: var(--gold);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Professional Photo Restoration</p>
+  <h1>Gloria Myers'<br><em>Imagery</em></h1>
+  <p class="hero-sub">Breathing new life into your treasured memories</p>
+  <a href="https://buy.stripe.com/8x2eVfdxh1XY6yx6SD5c408" class="hero-cta" target="_blank">Restore a Photo — $1</a>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>See the work</span>
+  </div>
+</section>
+
+<!-- SERVICE STRIP -->
+<div class="service-strip">
+  <span>$1 per photo</span>
+  <div class="strip-dot"></div>
+  <span>24-hour delivery</span>
+  <div class="strip-dot"></div>
+  <span>Digital delivery</span>
+  <div class="strip-dot"></div>
+  <span>All damage types</span>
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <span class="section-label reveal">About the service</span>
+  <h2 class="reveal">Your old photos deserve<br><em>to be seen again</em></h2>
+  <p class="reveal">Old photographs hold our most precious memories — family moments, weddings, milestones. But time is not kind to photos. Fading, scratches, tears, and discoloration slowly erase what once was vibrant and alive.</p>
+  <p class="reveal">Gloria Myers has spent years perfecting the art of photo restoration, bringing faded and damaged photographs back to life with stunning clarity and color. Each photo is hand-restored with care and delivered digitally within 24 hours.</p>
+  <div class="price-callout reveal">
+    <div class="price-num">$1</div>
+    <div class="price-label">per photo — introductory price</div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <span class="section-label reveal">Before & After</span>
+  <h2 class="reveal">The transformation<br>speaks for itself</h2>
+  <div class="gallery-grid">
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Dad &amp; Me</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/dad_me_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/dad_me_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Erica &amp; Dad</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/erica_dad_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/erica_dad_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Gloria &amp; Son</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/glo_son_old.JPG" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/glo_son_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Grandma &amp; Bob</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/grandma_bob_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/grandma_bob_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Mom &amp; Dad</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Mom, Dad &amp; Me</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_me_old.JPG" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_me_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Mom, Dad &amp; Me II</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_me_2_old.JPG" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_me_2_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Mom &amp; Dad II</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_2_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_2_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Mom &amp; Dad III</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_3_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_3_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Mom &amp; Dad — Wedding</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_wedding_old.jpg" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/mom_dad_wedding_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+    <div class="photo-pair reveal">
+      <p class="pair-label">Nabi &amp; Me — Wedding</p>
+      <div class="pair-images">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/nabi_me_wedding_old.JPG" alt="Before restoration" loading="lazy">
+        <img src="https://zubuqhdelzdujuwtcyzx.supabase.co/storage/v1/object/public/glo_images/nabi_me_wedding_new.png" alt="After restoration" loading="lazy">
+      </div>
+      <div class="pair-tags"><span class="pair-tag">Before</span><span class="pair-tag new-tag">After</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <span class="section-label reveal">Simple process</span>
+  <h2 class="reveal">How it works</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Pay $1</h3>
+      <p>Click the button, pay securely through Stripe. Apple Pay, Cash App, card — all accepted.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <h3>Send your photo</h3>
+      <p>After payment, email your old photo to Gloria. Any format works — scan, phone photo, or original.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>Get it back</h3>
+      <p>Within 24 hours, receive your beautifully restored photo delivered digitally to your inbox.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <h3>Cherish it</h3>
+      <p>Print it, share it, frame it. Your memory, restored to the quality it deserves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to restore<br>a <em>treasured memory?</em></h2>
+  <p>Just $1 per photo. Fast, professional, and done with love.</p>
+  <a href="https://buy.stripe.com/8x2eVfdxh1XY6yx6SD5c408" class="cta-btn" target="_blank">Restore My Photo — $1</a>
+  <span class="cta-note">Secure payment via Stripe · Digital delivery within 24 hours</span>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Gloria Myers' Imagery</span> · All rights reserved</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
