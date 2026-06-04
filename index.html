@@ -37,7 +37,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     position: relative;
     background: var(--dark);
     overflow: hidden;
@@ -53,19 +53,19 @@
 
   .hero-tag {
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-size: clamp(2.8rem, 10vw, 7rem);
     font-weight: 300;
     line-height: 1.05;
     color: var(--cream);
@@ -81,18 +81,19 @@
 
   .hero-sub {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1rem, 4vw, 1.5rem);
     font-weight: 300;
     font-style: italic;
     color: rgba(245,240,232,0.6);
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.6s;
+    padding: 0 1rem;
   }
 
   .hero-cta {
     display: inline-block;
-    padding: 1rem 3rem;
+    padding: 1rem 2.5rem;
     background: var(--gold);
     color: var(--dark);
     text-decoration: none;
@@ -104,18 +105,18 @@
     transition: background 0.3s ease, transform 0.2s ease;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.8s;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
   }
 
-  .hero-cta:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-  }
+  .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
 
   .hero-scroll {
     position: absolute;
     bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -125,15 +126,16 @@
   }
 
   .hero-scroll span {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(245,240,232,0.4);
+    white-space: nowrap;
   }
 
   .scroll-line {
     width: 1px;
-    height: 40px;
+    height: 36px;
     background: linear-gradient(to bottom, var(--gold), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
@@ -141,75 +143,78 @@
   /* SERVICE STRIP */
   .service-strip {
     background: var(--gold);
-    padding: 1.2rem 2rem;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 1.2rem;
     flex-wrap: wrap;
+    text-align: center;
   }
 
   .service-strip span {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--dark);
   }
 
   .strip-dot {
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     background: var(--dark);
     opacity: 0.4;
+    flex-shrink: 0;
   }
 
   /* ABOUT */
   .about {
-    padding: 7rem 2rem;
-    max-width: 800px;
+    padding: 5rem 1.5rem;
+    max-width: 600px;
     margin: 0 auto;
     text-align: center;
   }
 
   .section-label {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     display: block;
+    text-align: center;
   }
 
   .about h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: clamp(1.9rem, 6vw, 3.2rem);
     font-weight: 300;
     line-height: 1.3;
     color: var(--brown);
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
+    text-align: center;
   }
 
-  .about h2 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .about h2 em { font-style: italic; color: var(--gold); }
 
   .about p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.9;
     color: var(--muted);
     margin-bottom: 1.2rem;
+    text-align: center;
   }
 
   .price-callout {
     display: inline-block;
     margin-top: 2.5rem;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 2.5rem;
     border: 1px solid var(--border);
     background: var(--cream);
+    text-align: center;
   }
 
   .price-callout .price-num {
@@ -221,7 +226,7 @@
   }
 
   .price-callout .price-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
@@ -230,48 +235,61 @@
 
   /* GALLERY */
   .gallery-section {
-    padding: 4rem 2rem 7rem;
+    padding: 4rem 1.5rem 6rem;
     background: var(--cream);
+    text-align: center;
   }
 
-  .gallery-section > .section-label,
-  .gallery-section > h2 {
+  .gallery-section > .section-label {
     text-align: center;
     display: block;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .gallery-section > h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.9rem, 6vw, 3rem);
     font-weight: 300;
     color: var(--brown);
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     margin-top: 1rem;
+    text-align: center;
   }
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
-    max-width: 1200px;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 500px;
     margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 900px;
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1200px;
+    }
   }
 
   .photo-pair {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    align-items: center;
   }
 
   .pair-label {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-align: center;
   }
 
@@ -281,6 +299,7 @@
     gap: 3px;
     background: var(--gold);
     padding: 3px;
+    width: 100%;
   }
 
   .pair-images img {
@@ -295,16 +314,34 @@
     filter: sepia(0.3) grayscale(0.4);
   }
 
-  .pair-images img:hover {
-    opacity: 0.88;
+  .pair-images img:hover { opacity: 0.88; }
+
+  .pair-tags {
+    display: flex;
+    gap: 3px;
+    margin-top: 3px;
+    width: 100%;
   }
+
+  .pair-tag {
+    flex: 1;
+    text-align: center;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    background: var(--brown);
+    padding: 0.4rem;
+  }
+
+  .pair-tag.new-tag { background: var(--gold); color: var(--dark); }
 
   /* LIGHTBOX */
   .lightbox {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(20,14,10,0.96);
+    background: rgba(20,14,10,0.97);
     z-index: 9999;
     align-items: center;
     justify-content: center;
@@ -312,24 +349,21 @@
     cursor: zoom-out;
   }
 
-  .lightbox.open {
-    display: flex;
-  }
+  .lightbox.open { display: flex; }
 
   .lightbox img {
-    max-width: 92vw;
-    max-height: 92vh;
+    max-width: 94vw;
+    max-height: 88vh;
     width: auto;
     height: auto;
     object-fit: contain;
-    box-shadow: 0 0 80px rgba(0,0,0,0.8);
     cursor: default;
   }
 
   .lightbox-close {
     position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 1rem;
+    right: 1rem;
     width: 44px;
     height: 44px;
     background: var(--gold);
@@ -338,96 +372,84 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--dark);
     font-family: 'Jost', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     z-index: 10000;
+    border-radius: 0;
   }
 
   .lightbox-caption {
     position: fixed;
-    bottom: 2rem;
+    bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(245,240,232,0.5);
     z-index: 10000;
+    white-space: nowrap;
+    text-align: center;
   }
 
   .lightbox-nav {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(184,147,90,0.2);
+    background: rgba(184,147,90,0.15);
     border: 1px solid var(--gold);
     color: var(--gold);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     width: 44px;
-    height: 60px;
+    height: 64px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10000;
     transition: background 0.2s;
+    padding: 0;
   }
 
-  .lightbox-nav:hover { background: rgba(184,147,90,0.4); }
-  .lightbox-prev { left: 1rem; }
-  .lightbox-next { right: 1rem; }
-
-  .pair-tags {
-    display: flex;
-    gap: 3px;
-    margin-top: 3px;
-  }
-
-  .pair-tag {
-    flex: 1;
-    text-align: center;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--warm-white);
-    background: var(--brown);
-    padding: 0.4rem;
-  }
-
-  .pair-tag.new-tag {
-    background: var(--gold);
-    color: var(--dark);
-  }
+  .lightbox-nav:hover { background: rgba(184,147,90,0.35); }
+  .lightbox-prev { left: 0.5rem; }
+  .lightbox-next { right: 0.5rem; }
 
   /* HOW IT WORKS */
   .how-section {
-    padding: 7rem 2rem;
-    max-width: 900px;
+    padding: 5rem 1.5rem;
+    max-width: 700px;
     margin: 0 auto;
     text-align: center;
   }
 
   .how-section h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.9rem, 6vw, 3rem);
     font-weight: 300;
     color: var(--brown);
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     margin-top: 1rem;
+    text-align: center;
   }
 
   .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    text-align: left;
+    grid-template-columns: 1fr;
+    gap: 0;
+    text-align: center;
+  }
+
+  @media (min-width: 600px) {
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   }
 
   .step {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     border-top: 2px solid var(--gold);
+    text-align: center;
   }
 
   .step-num {
@@ -436,29 +458,32 @@
     font-weight: 300;
     color: var(--gold);
     line-height: 1;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
   }
 
   .step h3 {
     font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--brown);
     margin-bottom: 0.75rem;
+    text-align: center;
   }
 
   .step p {
-    font-size: 0.9rem;
-    line-height: 1.7;
+    font-size: 0.88rem;
+    line-height: 1.75;
     color: var(--muted);
+    text-align: center;
   }
 
   /* CTA SECTION */
   .cta-section {
     background: var(--dark);
-    padding: 7rem 2rem;
+    padding: 6rem 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -473,72 +498,73 @@
 
   .cta-section h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
     font-weight: 300;
     color: var(--cream);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
     position: relative;
+    text-align: center;
   }
 
-  .cta-section h2 em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
+  .cta-section h2 em { font-style: italic; color: var(--gold-light); }
 
   .cta-section p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: rgba(245,240,232,0.5);
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     position: relative;
+    text-align: center;
   }
 
   .cta-btn {
     display: inline-block;
-    padding: 1.2rem 4rem;
+    padding: 1.1rem 2.5rem;
     background: var(--gold);
     color: var(--dark);
     text-decoration: none;
     font-family: 'Jost', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: background 0.3s ease, transform 0.2s ease;
     position: relative;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
   }
 
-  .cta-btn:hover {
-    background: var(--gold-light);
-    transform: translateY(-3px);
-  }
+  .cta-btn:hover { background: var(--gold-light); transform: translateY(-3px); }
 
   .cta-note {
     display: block;
     margin-top: 1.5rem;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     color: rgba(245,240,232,0.3);
     position: relative;
+    text-align: center;
+    padding: 0 1rem;
+    line-height: 1.8;
   }
 
   /* FOOTER */
   footer {
     background: var(--dark);
     border-top: 1px solid rgba(184,147,90,0.15);
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     text-align: center;
   }
 
   footer p {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     color: rgba(245,240,232,0.3);
+    text-align: center;
   }
 
-  footer span {
-    color: var(--gold);
-  }
+  footer span { color: var(--gold); }
 
   /* ANIMATIONS */
   @keyframes fadeUp {
@@ -547,14 +573,14 @@
   }
 
   @keyframes scrollPulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.1); }
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
   }
 
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
   .reveal.visible {
@@ -593,7 +619,7 @@
   <span class="section-label reveal">About the service</span>
   <h2 class="reveal">Your old photos deserve<br><em>to be seen again</em></h2>
   <p class="reveal">Old photographs hold our most precious memories — family moments, weddings, milestones. But time is not kind to photos. Fading, scratches, tears, and discoloration slowly erase what once was vibrant and alive.</p>
-  <p class="reveal">Gloria Myers uses AI to perfect the art of photo restoration, bringing faded and damaged photographs back to life with stunning clarity and color. Each photo is hand-restored with care and delivered digitally within 24 hours.</p>
+  <p class="reveal">Gloria Myers uses AI to perfect the art of photo restoration, bringing faded and damaged photographs back to life with stunning clarity and color. Each photo is restored with care and delivered digitally within 24 hours.</p>
   <div class="price-callout reveal">
     <div class="price-num">$1</div>
     <div class="price-label">per photo — introductory price</div>
@@ -602,7 +628,7 @@
 
 <!-- GALLERY -->
 <section class="gallery-section">
-  <span class="section-label reveal">Before & After</span>
+  <span class="section-label reveal">Before &amp; After</span>
   <h2 class="reveal">The transformation<br>speaks for itself</h2>
   <div class="gallery-grid">
 
@@ -760,23 +786,20 @@
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // LIGHTBOX
   const allImgs = [];
-  document.querySelectorAll('.pair-images img').forEach((img, i) => {
-    allImgs.push({ src: img.src, caption: img.closest('.photo-pair').querySelector('.pair-label').textContent + ' — ' + (img.classList.contains('after-img') ? 'After' : img === img.parentElement.firstElementChild ? 'Before' : 'After') });
-    img.addEventListener('click', () => openLightbox(i));
-  });
-
-  // Tag before/after for caption
   document.querySelectorAll('.pair-images').forEach(pair => {
     const imgs = pair.querySelectorAll('img');
-    if (imgs[1]) imgs[1].classList.add('after-img');
+    const label = pair.closest('.photo-pair').querySelector('.pair-label').textContent;
+    imgs.forEach((img, i) => {
+      const caption = label + ' — ' + (i === 0 ? 'Before' : 'After');
+      const idx = allImgs.length;
+      allImgs.push({ src: img.src, caption });
+      img.addEventListener('click', () => openLightbox(idx));
+    });
   });
 
   let current = 0;
